@@ -1,0 +1,29 @@
+{
+    "selector": {
+        "css": "body"
+    },
+    "root": true,
+        "elements": [
+            {
+                "name": "input",
+                "selector": {
+                    "css": "input[name='%s']",
+                    "args": [
+                        {
+                            "name": "name",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "public": true,
+                "type": "editable"
+            },
+            {
+                "name": "submitButton",
+                "type": "clickable",
+                "selector": {
+                    "css": "button[type=submit]"
+                }
+            }        
+        ]       
+}

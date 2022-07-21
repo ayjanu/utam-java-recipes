@@ -42,3 +42,4 @@ log.out
 **/test-output/
 **/.classpath
 **/.settings
+utam-preview/src/main/resources/spec/force-app/GLC-UTAM.json
