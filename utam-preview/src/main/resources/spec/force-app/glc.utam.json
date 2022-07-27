@@ -23,7 +23,8 @@
                 "type": "clickable",
                 "selector": {
                     "css": "button[type=submit]"
-                }
+                },
+                "public": true
             }        
-        ]       
+        ]      
 }

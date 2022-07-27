@@ -36,7 +36,7 @@ public class RecordCreationTests extends SalesforceWebTestBase {
 
   @BeforeTest
   public void setup() {
-    setupChrome();
+    setupFirefox();
     login(testEnvironment, "home");
   }
 

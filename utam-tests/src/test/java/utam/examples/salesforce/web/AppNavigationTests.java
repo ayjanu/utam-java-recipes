@@ -28,7 +28,7 @@ public class AppNavigationTests extends SalesforceWebTestBase {
 
   @BeforeTest
   public void setup() {
-    setupChrome();
+    setupFirefox();
     login(testEnvironment, "home");
   }
 

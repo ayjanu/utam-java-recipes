@@ -1,0 +1,17 @@
+{
+    "selector": {
+        "css": "body"
+    },
+    "root": true,
+        "elements": [
+          {
+            "name": "leads",
+            "selector": {
+                "css": "navItem slds-context-bar__item slds-shrink-none",
+            },
+            "public": true,
+            "type": "clickable"
+          }
+      ]
+         
+}
