@@ -41,13 +41,14 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
 
   @BeforeTest
   public void setup() {
-    setupChrome();
+    setupFirefox();
     login(testEnvironment, "home");
   }
 
   private void gotoRecordHomeByUrl(RecordType recordType, String recordId) {
-    String recordHomeUrl = recordType.getRecordHomeUrl(testEnvironment.getRedirectUrl(), recordId);
-    log("Navigate to the Record Home by URL: " + recordHomeUrl);
+   // String recordHomeUrl = recordType.getRecordHomeUrl(testEnvironment.getRedirectUrl(), recordId);
+   String recordHomeUrl = recordType.getRecordHomeUrl("https://solonus6-dev-ed.lightning.force.com/", recordId);
+   log("Navigate to the Record Home by URL: " + recordHomeUrl);
     getDriver().get(recordHomeUrl);
   }
 
@@ -55,7 +56,7 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
   public void testEditAccountRecord() {
 
     // todo - replace with existing Account Id for the environment
-    final String accountRecordId = "001S7000002X6FSIA0";
+    final String accountRecordId = "0018X000033dmVEQAY";
     gotoRecordHomeByUrl(RecordType.Account, accountRecordId);
 
     log("Load Accounts Record Home page");
@@ -87,7 +88,7 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
   @Test
   public void testInlineEditContactRecord() {
 
-    final String recordId = "003S7000001vfDXIAY";
+    final String recordId = "0038X00003bkkhAQAQ";
     gotoRecordHomeByUrl(RecordType.Contact, recordId);
 
     RecordHomeFlexipage2 recordHome = from(RecordHomeFlexipage2.class);
@@ -128,10 +129,10 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
   }
 
   @Test
-  public void testEditLeadRecord() {
+e public void testEditLeadRecord() {
 
     // todo - replace with existing Lead Id for the environment
-    final String leadId = "00QS7000001OXVqMAO";
+    final String leadId = "00Q8X00001m54HMUAY";
     gotoRecordHomeByUrl(RecordType.Lead, leadId);
 
     log("Load Lead Record Home page");

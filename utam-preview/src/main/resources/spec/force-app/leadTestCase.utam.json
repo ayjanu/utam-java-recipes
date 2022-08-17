@@ -5,12 +5,12 @@
     "root": true,
     "elements": [
         {
-            "name": "leads",
-            "selector": {
-                "css": "navItem slds-context-bar__item slds-shrink-none"
-            },
+            "type": "container",
+            "name": "inputFieldContainer",
             "public": true,
-            "type": "clickable"
+            "selector": {
+                "css": "[slot='inputField']"
+            }
         }
     ]
 }
