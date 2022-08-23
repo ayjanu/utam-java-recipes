@@ -129,7 +129,7 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
   }
 
   @Test
-e public void testEditLeadRecord() {
+public void testEditLeadRecord() {
 
     // todo - replace with existing Lead Id for the environment
     final String leadId = "00Q8X00001m54HMUAY";

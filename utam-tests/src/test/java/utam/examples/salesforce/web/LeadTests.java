@@ -12,6 +12,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import utam.action.pageobjects.RibbonMenuItem;
 import utam.force.pageobjects.ListViewManagerHeader;
 import utam.force.pageobjects.OutputLookup;
 import utam.global.pageobjects.AppNavBar;
@@ -21,6 +23,7 @@ import utam.global.pageobjects.RecordHomeFlexipage2;
 import utam.lightning.pageobjects.Input;
 import utam.lightning.pageobjects.Picklist;
 import utam.navex.pageobjects.DesktopLayoutContainer;
+import utam.record.flexipage.pageobjects.RecordPageDecorator;
 import utam.records.pageobjects.BaseRecordForm;
 import utam.records.pageobjects.LwcHighlightsPanel;
 import utam.records.pageobjects.LwcRecordLayout;
@@ -28,6 +31,7 @@ import utam.records.pageobjects.RecordLayoutInputName;
 import utam.records.pageobjects.RecordLayoutItem;
 import utam.utils.salesforce.RecordType;
 import utam.utils.salesforce.TestEnvironment;
+import utam.global.pageobjects.*;
 
 /**
  * IMPORTANT: Page objects and tests for Salesforce UI are compatible with the
@@ -56,7 +60,7 @@ public class LeadTests extends SalesforceWebTestBase {
     getDriver().get(recordHomeUrl);
   }
 
-  //@Test
+  @Test
   public void leadCreation() {
     getDriver().get(testEnvironment.getRedirectUrl());
     DesktopLayoutContainer layoutContainer = from(DesktopLayoutContainer.class);
@@ -97,20 +101,38 @@ public class LeadTests extends SalesforceWebTestBase {
   @Test
   public void leadConversion() {
     // todo - replace with existing Lead Id for the environment
-    final String leadId = "00Q8X00001m54HMUAY";
+    final String leadId = "00Q8X00001nkEdLUAU";
     gotoRecordHomeByUrl(RecordType.Lead, leadId);
 
     log("Load Lead Record Home page");
     RecordHomeFlexipage2 recordHome = from(RecordHomeFlexipage2.class);
 
 
-    log("Access Record Highlights panel");
-    LwcHighlightsPanel highlightsPanel = recordHome.getHighlights();
+    //log("Access Record Highlights panel");
+    //LwcHighlightsPanel highlightsPanel = recordHome.getHighlights();
+    
+   // log("Click the down button to expand menu");
+   // highlightsPanel.getActions().getDropdownButton().clickButton();
+    
+    log("Get page decorator");
+    RecordPageDecorator decorator = recordHome.getDecorator();
 
-    log("Click dropdown");
+    LwcHighlightsPanel highlightsPanel = decorator.getWithSubheaderTemplateDesktop2().getHighlights();
+
+    log("Click the down button to expand menu");
     highlightsPanel.getActions().getDropdownButton().clickButton();
+    
+    log("Select the Convert menu item");
+    highlightsPanel.getActions().getActionRendererWithTitle("Convert").getRibbonMenuItem().clickLinkItem();
+    RecordActionWrapper recordTypeModal = from(RecordActionWrapper.class);
+    BaseRecordForm recordForm = recordTypeModal.getRecordForm();
+    LwcRecordLayout recordLayout = recordForm.getRecordLayout();
+
+    recordForm.clickFooterButton("Convert");  
+    recordTypeModal.waitForAbsence();
 
   }
+  
 
   //@AfterTest
   public final void tearDown() {
