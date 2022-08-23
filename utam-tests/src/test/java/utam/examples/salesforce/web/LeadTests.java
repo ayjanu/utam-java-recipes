@@ -60,7 +60,7 @@ public class LeadTests extends SalesforceWebTestBase {
     getDriver().get(recordHomeUrl);
   }
 
-  @Test
+  // @Test
   public void leadCreation() {
     getDriver().get(testEnvironment.getRedirectUrl());
     DesktopLayoutContainer layoutContainer = from(DesktopLayoutContainer.class);
@@ -124,12 +124,12 @@ public class LeadTests extends SalesforceWebTestBase {
     
     log("Select the Convert menu item");
     highlightsPanel.getActions().getActionRendererWithTitle("Convert").getRibbonMenuItem().clickLinkItem();
-    RecordActionWrapper recordTypeModal = from(RecordActionWrapper.class);
-    BaseRecordForm recordForm = recordTypeModal.getRecordForm();
-    LwcRecordLayout recordLayout = recordForm.getRecordLayout();
+    // RecordActionWrapper recordTypeModal = from(RecordActionWrapper.class);
+    // BaseRecordForm recordForm = recordTypeModal.getRecordForm();
+    // LwcRecordLayout recordLayout = recordForm.getRecordLayout();
 
-    recordForm.clickFooterButton("Convert");  
-    recordTypeModal.waitForAbsence();
+    // recordForm.clickFooterButton("Convert");  
+    // recordTypeModal.waitForAbsence();
 
   }
   
