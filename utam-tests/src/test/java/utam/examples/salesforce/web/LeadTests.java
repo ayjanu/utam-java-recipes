@@ -29,6 +29,7 @@ import utam.records.pageobjects.LwcHighlightsPanel;
 import utam.records.pageobjects.LwcRecordLayout;
 import utam.records.pageobjects.RecordLayoutInputName;
 import utam.records.pageobjects.RecordLayoutItem;
+import utam.salesforceapp.pageobjects.navigation.SearchBar;
 import utam.utils.salesforce.RecordType;
 import utam.utils.salesforce.TestEnvironment;
 import utam.global.pageobjects.*;
@@ -117,7 +118,7 @@ public class LeadTests extends SalesforceWebTestBase {
     recordForm.clickFooterButton("Save");
   }
 
-  @Test
+  // @Test
   public void leadConversion() {
     log("Lead ID can be found in the URL of the lead.");
     final String leadId = "00Q8X00001nkEdLUAU";
@@ -148,10 +149,20 @@ public class LeadTests extends SalesforceWebTestBase {
 
   }
   
+  @Test
+  public void inputValidation() {
+    log("Navigate to user homepage.");
+    getDriver().get(testEnvironment.getRedirectUrl());
+
+    log("Find the container with the layout of the current page intact.");
+    DesktopLayoutContainer layoutContainer = from(DesktopLayoutContainer.class);
+    // SearchAssistant does not exist
+
+  }
 
   //@AfterTest
   public final void tearDown() {
-    // quitDriver();
+    quitDriver();
   }
 
 }
