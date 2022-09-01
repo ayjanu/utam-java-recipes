@@ -62,20 +62,35 @@ public class LeadTests extends SalesforceWebTestBase {
 
   // @Test
   public void leadCreation() {
+    log("Navigate to user homepage.");
     getDriver().get(testEnvironment.getRedirectUrl());
+    
+    log("Find the container with the layout of the current page intact.");
     DesktopLayoutContainer layoutContainer = from(DesktopLayoutContainer.class);
+
+    log("Access the navigation bar at the top of the page and go to Lead");
     AppNavBar navBar = layoutContainer.getAppNav().getAppNavBar();
     navBar.getNavItem("Lead").clickAndWaitForUrl("Lead");
+
+    log("Find container with layout of the current page intact.");
     ConsoleObjectHome objectHome = from(ConsoleObjectHome.class);
+
+    log("Access header within Lead page and go to new lead");
     ListViewManagerHeader listViewHeader = objectHome.getListView().getHeader();
     listViewHeader.waitForAction("New").click();
+
+    log("Access record modal for layout of questionairre.");
     RecordActionWrapper recordTypeModal = from(RecordActionWrapper.class);
     BaseRecordForm recordForm = recordTypeModal.getRecordForm();
     LwcRecordLayout recordLayout = recordForm.getRecordLayout();
+
+    log("Input fields by indices [section, row, item]");
     RecordLayoutItem item = recordLayout.getItem(1, 1, 2);
     item.getInput().setText("9725551234");
     item = recordLayout.getItem(1, 2, 1);
     RecordLayoutInputName name = item.getInputName();
+
+    log("Access dropdown menu/picklist for salutations via BaseComboBox, expand, click.");
     Picklist salutation = name.getInputName().getSalutationPicklist();
     salutation.getBaseCombobox().expand();
     salutation.getBaseCombobox().pickItem(2);
@@ -92,34 +107,34 @@ public class LeadTests extends SalesforceWebTestBase {
     item.getTextInput().setText("Java Developer");
     item = recordLayout.getItem(1, 4, 2);
     item.getInput().setText("ayansjannu@gmail.com");
+
+    log("Select fax using another BaseComboBox");
     item = recordLayout.getItem(1, 5, 1);
     item.getPicklist().getBaseCombobox().expand();
     item.getPicklist().getBaseCombobox().pickItem(2);
+
+    log("Click form footer button Save.");
     recordForm.clickFooterButton("Save");
   }
 
   @Test
   public void leadConversion() {
-    // todo - replace with existing Lead Id for the environment
+    log("Lead ID can be found in the URL of the lead.");
     final String leadId = "00Q8X00001nkEdLUAU";
+
+    log("Go to the lead page by ID.");
     gotoRecordHomeByUrl(RecordType.Lead, leadId);
 
     log("Load Lead Record Home page");
     RecordHomeFlexipage2 recordHome = from(RecordHomeFlexipage2.class);
 
-
-    //log("Access Record Highlights panel");
-    //LwcHighlightsPanel highlightsPanel = recordHome.getHighlights();
-    
-   // log("Click the down button to expand menu");
-   // highlightsPanel.getActions().getDropdownButton().clickButton();
-    
     log("Get page decorator");
     RecordPageDecorator decorator = recordHome.getDecorator();
 
+    log("Similar to getting header for clicking New except the option is in overflow");
     LwcHighlightsPanel highlightsPanel = decorator.getWithSubheaderTemplateDesktop2().getHighlights();
 
-    log("Click the down button to expand menu");
+    log("With the highlights panel, we can get the dropdown button and click.");
     highlightsPanel.getActions().getDropdownButton().clickButton();
     
     log("Select the Convert menu item");
